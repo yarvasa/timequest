@@ -1,8 +1,9 @@
 Ext.application({
     appFolder: '/UI',
     name: 'App',
+    autoCreateViewport: true,
     models: [
-
+        'NavigationModel'
     ],
     stores: [
 
@@ -11,13 +12,14 @@ Ext.application({
 
     ],
     controllers: [
-
+        'NavigationController',
+        'TeamConfigController'
     ],
     requires:[
 
     ],
 
-    launch:function () {
-        Ext.create('Social.view.Viewport');
+    launch: function () {
+
     }
 });

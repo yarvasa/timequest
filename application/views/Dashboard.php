@@ -1,37 +1,28 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
+	<title><?=$T['app.base.title']?></title>
+
+    <script type="text/javascript">
+        var LocaleDictionary = <?=$localeDictionary?>;
+        function t(key) {
+            return LocaleDictionary[key] || key;
+        }
+
+        var localUrl = "<?=$baseUrlRedirect?>";
+    </script>
 
     <script type="text/javascript" src="/extjs/ext-all.js"></script>
     <link rel="stylesheet" href="/extjs/resources/css/ext-all.css" />
 
     <script type="text/javascript" src="/UI/app.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?=$baseUrl?>resources/css/main-page.css" />
+    <link rel="stylesheet" type="text/css" href="<?=$baseUrl?>resources/css/navigation.css" />
 </head>
 <body>
-
-<div id="container">
-	<h1>Welcome to CodeIgniter!</h1>
-
-	<div id="body">
-		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
-
-		<p>If you would like to edit this page you'll find it located at:</p>
-		<code>application/views/welcome_message.php</code>
-
-		<p>The corresponding controller for this page is found at:</p>
-		<code>application/controllers/Welcome.php</code>
-
-		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
-	</div>
-
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
-</div>
-
-<a href="/index.php/users/logout">Logout</a>
 
 </body>
 </html>

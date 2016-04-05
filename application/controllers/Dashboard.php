@@ -7,7 +7,15 @@ class Dashboard extends CI_Controller {
         if (!$this->session->userdata('user_data')) {
             redirect($this->config->item('base_url_redirect') . 'users/login');
         } else {
-            $this->load->view('Dashboard');
+            $this->load->helper('locale');
+
+            $localesArray = getLocaleFromDB($this->db);
+            $this->load->view('Dashboard', array(
+                "T" => $localesArray,
+                'baseUrl' => $this->config->item('base_url'),
+                'baseUrlRedirect' => $this->config->item('base_url_redirect'),
+                "localeDictionary" => getLocaleDictionary($localesArray)
+            ));
         }
 	}
 
