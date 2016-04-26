@@ -42,6 +42,7 @@
 
 .selected-navigation-item {
     background-color: powderblue;
+    white-space: nowrap;
 }
 
 .selected-navigation-item .navigation-text {

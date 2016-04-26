@@ -33,3 +33,52 @@
 .create-team-button .x-btn-inner {
     font-size: 14px;
 }
+
+.accept-invite-button {
+    background-image: url(../images/accept_invite.png);
+}
+
+.decline-invite-button {
+    background-image: url(../images/decline_invite.png);
+    margin-left: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+.info-block {
+    padding: 5px 15px 5px 30px;
+    background-image: url(../images/info.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    line-height: 16px;
+    border: 1px solid #cecece;
+    width: 100%;
+    background-position: 5px 5px;
+    background-color: aliceblue;
+}
+
+.info-block.only-vertical-border {
+    border-left: 0px;
+    border-right: 0px;
+}
+
+.refresh-button {
+    margin: -1px 0px 10px 0px;
+    background: lightyellow;
+    border-radius: 0px;
+    float: right;
+}
+
+.refresh-button:hover {
+    background: #77ff77;
+}
+
+.refresh-button .x-btn-inner {
+    font-size: 18px;
+}
+
+.user-invites-grid {
+    border-width: 1px 0 1px 0;
+}

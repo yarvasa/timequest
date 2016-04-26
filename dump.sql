@@ -42,16 +42,16 @@ INSERT INTO `locale` (`key`, `value`) VALUES
 DROP TABLE IF EXISTS `quests`;
 CREATE TABLE IF NOT EXISTS `quests` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) CHARACTER SET latin1 NOT NULL,
-  `description` text CHARACTER SET latin1 NOT NULL,
-  `picture` varchar(200) CHARACTER SET latin1 NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `description` text CHARACTER SET utf8 NOT NULL,
+  `picture` varchar(200) CHARACTER SET utf8 NOT NULL,
   `time_start` bigint(20) NOT NULL,
   `time_continue` bigint(20) NOT NULL,
   `statistic_open` tinyint(4) NOT NULL DEFAULT '0',
-  `finish_text` text CHARACTER SET latin1 NOT NULL,
-  `status` enum('OPEN','IN_PROGRESS','FINISHED','CLOSED','HIDDEN') CHARACTER SET latin1 NOT NULL DEFAULT 'OPEN',
+  `finish_text` text CHARACTER SET utf8 NOT NULL,
+  `status` enum('OPEN','IN_PROGRESS','FINISHED','CLOSED','HIDDEN') CHARACTER SET utf8 NOT NULL DEFAULT 'OPEN',
   `price` int(11) NOT NULL,
-  `task_sequence` enum('LINEAR','TIMER') CHARACTER SET latin1 NOT NULL DEFAULT 'LINEAR',
+  `task_sequence` enum('LINEAR','TIMER') CHARACTER SET utf8 NOT NULL DEFAULT 'LINEAR',
   `show_scenario` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -69,9 +69,9 @@ CREATE TABLE IF NOT EXISTS `quests_aud` (
   `id_author` int(11) NOT NULL,
   `id_quest` int(11) NOT NULL,
   `execution_time` bigint(20) NOT NULL,
-  `action` varchar(100) CHARACTER SET latin1 NOT NULL,
-  `oldValue` varchar(200) CHARACTER SET latin1 NOT NULL,
-  `newValue` varchar(200) CHARACTER SET latin1 NOT NULL,
+  `action` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `oldValue` varchar(200) CHARACTER SET utf8 NOT NULL,
+  `newValue` varchar(200) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -101,7 +101,7 @@ DROP TABLE IF EXISTS `tasks`;
 CREATE TABLE IF NOT EXISTS `tasks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_quest` int(11) NOT NULL,
-  `task_name` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `task_name` varchar(100) CHARACTER SET utf8 NOT NULL,
   `index` int(11) NOT NULL,
   `auto_cancel_time` int(11) NOT NULL,
   `answer_visible` tinyint(4) NOT NULL DEFAULT '0',
@@ -109,8 +109,8 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   `count_objects` int(11) NOT NULL,
   `count_answers` int(11) NOT NULL,
   `needed_count_answers` int(11) NOT NULL,
-  `type_signal` varchar(100) CHARACTER SET latin1 NOT NULL,
-  `type_marker` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `type_signal` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `type_marker` varchar(100) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -125,7 +125,7 @@ DROP TABLE IF EXISTS `tasks_answers`;
 CREATE TABLE IF NOT EXISTS `tasks_answers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_task` int(11) NOT NULL,
-  `value` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `value` varchar(100) CHARACTER SET utf8 NOT NULL,
   `index` int(11) NOT NULL,
   `bonus_time` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
@@ -143,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `tasks_bonuses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_team_vs_task` int(11) NOT NULL,
   `bonus_time` int(11) NOT NULL,
-  `description` text CHARACTER SET latin1 NOT NULL,
+  `description` text CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -160,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `tasks_help` (
   `id_task` int(11) NOT NULL,
   `index` int(11) NOT NULL,
   `help_time` int(11) NOT NULL,
-  `text` text CHARACTER SET latin1 NOT NULL,
+  `text` text CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -194,9 +194,9 @@ CREATE TABLE IF NOT EXISTS `teams_aud` (
   `id_team` int(11) NOT NULL,
   `id_author` int(11) NOT NULL,
   `execution_time` bigint(20) NOT NULL,
-  `action` varchar(100) CHARACTER SET latin1 NOT NULL,
-  `oldValue` varchar(100) CHARACTER SET latin1 NOT NULL,
-  `newValue` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `action` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `oldValue` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `newValue` varchar(100) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -212,8 +212,8 @@ CREATE TABLE IF NOT EXISTS `teams_in_quest` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_team` int(11) NOT NULL,
   `id_quest` int(11) NOT NULL,
-  `status` enum('IN_PROGRESS','ACCEPTED','DECLINED') CHARACTER SET latin1 NOT NULL DEFAULT 'IN_PROGRESS',
-  `status_in_quest` enum('IN_PROGRESS','BEFORE','AFTER') CHARACTER SET latin1 NOT NULL DEFAULT 'BEFORE',
+  `status` enum('IN_PROGRESS','ACCEPTED','DECLINED') CHARACTER SET utf8 NOT NULL DEFAULT 'IN_PROGRESS',
+  `status_in_quest` enum('IN_PROGRESS','BEFORE','AFTER') CHARACTER SET utf8 NOT NULL DEFAULT 'BEFORE',
   `current_help_index` int(11) NOT NULL,
   `current_task_index` int(11) NOT NULL,
   PRIMARY KEY (`id`)
@@ -246,18 +246,18 @@ DELETE FROM `team_vs_tasks`;
 -- Dumping structure for таблиц€ time_quest.users
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-  `uid` varchar(50) CHARACTER SET latin1 NOT NULL,
-  `photo` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
-  `identity` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
+  `uid` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `photo` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `identity` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `first_name` varchar(100) CHARACTER SET utf8 NOT NULL,
   `last_name` varchar(100) CHARACTER SET utf8 NOT NULL,
-  `profile` varchar(100) CHARACTER SET latin1 NOT NULL,
-  `network` varchar(100) CHARACTER SET latin1 NOT NULL,
-  `type` enum('SUPERADMIN','ADMIN','MODERATOR','USER') CHARACTER SET latin1 NOT NULL DEFAULT 'USER',
+  `profile` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `network` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `type` enum('SUPERADMIN','ADMIN','MODERATOR','USER') CHARACTER SET utf8 NOT NULL DEFAULT 'USER',
   `createdTime` bigint(20) NOT NULL,
   `lastLoggedBy` bigint(20) DEFAULT NULL,
   `phone` bigint(20) DEFAULT NULL,
-  `email` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `email` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
   UNIQUE KEY `≤ндекс 1` (`uid`,`network`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf32 COLLATE=utf32_unicode_ci;
 
@@ -281,7 +281,7 @@ CREATE TABLE IF NOT EXISTS `users_answers` (
   `value` varchar(100) NOT NULL DEFAULT '',
   `isValid` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Dumping data for table time_quest.users_answers: 0 rows
 DELETE FROM `users_answers`;
@@ -300,7 +300,7 @@ CREATE TABLE IF NOT EXISTS `users_aud` (
   `oldValue` varchar(100) NOT NULL,
   `newValue` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Dumping data for table time_quest.users_aud: 0 rows
 DELETE FROM `users_aud`;
@@ -356,7 +356,7 @@ CREATE TABLE IF NOT EXISTS `users_invites` (
   `id_team` int(11) NOT NULL,
   `id_author` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `status` enum('ACCEPTED','DECLINED','CANCELED','IN_PROGRESS') CHARACTER SET latin1 NOT NULL DEFAULT 'IN_PROGRESS',
+  `status` enum('ACCEPTED','DECLINED','CANCELED','IN_PROGRESS') CHARACTER SET utf8 NOT NULL DEFAULT 'IN_PROGRESS',
   `request_time` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -377,7 +377,7 @@ CREATE TABLE IF NOT EXISTS `users_in_team` (
   `id_team` int(11) NOT NULL,
   `status` enum('CAPTAIN','KERNEL','HUMAN') NOT NULL DEFAULT 'HUMAN',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Dumping data for table time_quest.users_in_team: 0 rows
 DELETE FROM `users_in_team`;

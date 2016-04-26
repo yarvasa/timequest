@@ -15,8 +15,8 @@
         var localUrl = "<?=$baseUrlRedirect?>";
     </script>
 
-    <script type="text/javascript" src="/extjs/ext-all.js"></script>
-    <link rel="stylesheet" href="/extjs/resources/css/ext-all.css" />
+    <script type="text/javascript" src="/extjs/ext-all-debug.js"></script>
+    <link rel="stylesheet" href="/extjs/resources/css/ext-all-debug.css" />
 
     <script type="text/javascript" src="/UI/app.js"></script>
     <link rel="stylesheet" type="text/css" href="<?=$baseUrl?>resources/css/main-page.css" />

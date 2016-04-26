@@ -12,7 +12,8 @@ Ext.define('App.view.Viewport', {
                 {
                     xtype: 'panel',
                     region: 'west',
-                    width: 300,
+                    width: '30%',
+                    maxWidth: 270,
                     collapsible: true,
                     items: [
 //                        {

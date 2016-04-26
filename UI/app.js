@@ -1,3 +1,7 @@
+Ext.Loader.setConfig({
+    disableCaching: true
+});
+
 Ext.application({
     appFolder: '/UI',
     name: 'App',
@@ -9,7 +13,7 @@ Ext.application({
 
     ],
     views:[
-
+        'Utils'
     ],
     controllers: [
         'NavigationController',

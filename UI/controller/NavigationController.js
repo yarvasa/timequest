@@ -36,6 +36,8 @@ Ext.define('App.controller.NavigationController', {
         var me = this,
             contentBlock = me.getContentBlock();
 
+        if (!selected || !selected.length) return;
+
         switch (selected[0].get('action')) {
             case 'team':
                 contentBlock.removeAll();
@@ -56,9 +58,10 @@ Ext.define('App.controller.NavigationController', {
 
                 var response = JSON.parse(data.responseText);
                 if (response.success) {
-                    contentBlock.add(Ext.create('App.view.team.TeamConfigBlock', {
+                    contentBlock.add({
+                        xtype: 'teamconfigblock',
                         teamConfig: response.data
-                    }));
+                    });
                 }
             },
             failure: function () {

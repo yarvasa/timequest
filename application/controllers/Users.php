@@ -57,7 +57,7 @@ class Users extends CI_Controller {
         ));
     }
 
-    public function getCurrentTime() {
+    private function getCurrentTime() {
         return date_timestamp_get(date_create());
     }
 
