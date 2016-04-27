@@ -13,6 +13,10 @@ class Team extends CI_Controller {
                 "invites" => $this->getUserInvites($userdata)
             );
 
+            $result["data"]["usersInTeam"] = $result["data"]["currentTeam"]
+                ? $this->getUsersInTeam($result["data"]["currentTeam"]["id_team"])
+                : null;
+
             $result['success'] = true;
             echo json_encode($result);
         }
@@ -134,6 +138,24 @@ class Team extends CI_Controller {
                 ->delete('users_in_team');
 
             echo json_encode($result);
+        }
+    }
+
+    private function getUsersInTeam($idTeam) {
+        $query = $this->db->select('uit.id_user, uit.status, CONCAT(u.first_name, \' \', u.last_name) AS username, u.profile')
+            ->from('users u')
+            ->join('users_in_team uit', 'uit.id_user = u.uid')
+            ->where('uit.id_team', $idTeam)
+            ->get();
+
+        if ($query->num_rows() == 0) {
+            return null;
+        } else {
+            $result = array();
+            foreach ($query->result_array() as $row) {
+                $result[] = $row;
+            }
+            return $result;
         }
     }
 }

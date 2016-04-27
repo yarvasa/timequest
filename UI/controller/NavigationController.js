@@ -56,16 +56,21 @@ Ext.define('App.controller.NavigationController', {
             success: function(data) {
                 Ext.getBody().el.unmask();
 
-                var response = JSON.parse(data.responseText);
-                if (response.success) {
-                    contentBlock.add({
-                        xtype: 'teamconfigblock',
-                        teamConfig: response.data
-                    });
+                try {
+                    var response = JSON.parse(data.responseText);
+                    if (response.success) {
+                        contentBlock.add({
+                            xtype: 'teamconfigblock',
+                            teamConfig: response.data
+                        });
+                    }
+                } catch (e) {
+                    App.Utils.error(t('app.error.general'));
                 }
             },
             failure: function () {
                 Ext.getBody().el.unmask();
+                App.Utils.error(t('app.error.general'));
             }
         });
     }

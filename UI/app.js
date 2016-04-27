@@ -13,7 +13,8 @@ Ext.application({
 
     ],
     views:[
-        'Utils'
+        'Utils',
+        'enums.UsersInTeamStatus'
     ],
     controllers: [
         'NavigationController',

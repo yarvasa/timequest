@@ -36,7 +36,7 @@ Ext.define('App.view.team.TeamConfigBlock', {
         } else {
             items.push(App.Utils.getInfoBlock({
                 cls: 'only-vertical-border',
-                margin: '0 0 10 0',
+                margin: '0 0 15 0',
                 text: Ext.String.format(
                     t('app.team.in_team'),
                     me.teamConfig.currentTeam.teamName
@@ -49,6 +49,10 @@ Ext.define('App.view.team.TeamConfigBlock', {
                 margin: '0 0 15 20',
                 text: t('app.team.leave_team')
             });
+
+            if (me.teamConfig.usersInTeam && me.teamConfig.usersInTeam.length) {
+                items.push(me.getUsersInTeamGrid());
+            }
 
             items.push(App.Utils.getInfoBlock({
                 cls: 'only-vertical-border',
@@ -137,13 +141,58 @@ Ext.define('App.view.team.TeamConfigBlock', {
         return {
             xtype: 'grid',
             autoScroll: true,
-            height: 300,
             cls: 'user-invites-grid',
             title: t('app.users.invites.title'),
             emptyText: t('app.users.invites.empty_text'),
             store: Ext.create('Ext.data.Store', {
                 model: 'App.model.InviteModel',
                 data: me.teamConfig.invites
+            }),
+            columns: columns
+        };
+    },
+
+    getUsersInTeamGrid: function() {
+        var me = this,
+            columns = [];
+
+        columns.push({
+            header: t('app.users_in_team.column.user'),
+            dataIndex: 'username',
+            menuDisabled: true,
+            draggable: false,
+            sortable: false,
+            resizable: false,
+            flex: 1,
+            renderer: function (value, opt, model) {
+                return '<a class="link-to-profile" target="_blank" href="' + model.get('profile') + '">' +
+                            value
+                       '</a>';
+            }
+        });
+
+        columns.push({
+            header: t('app.users_in_team.column.status'),
+            dataIndex: 'status',
+            menuDisabled: true,
+            draggable: false,
+            resizable: false,
+            sortable: false,
+            width: 150,
+            renderer: function (value, opt, model) {
+                return App.UsersInTeamStatus.getMessage(value);
+            }
+        });
+
+        return {
+            xtype: 'grid',
+            autoScroll: true,
+            margin: '0 0 30 0',
+            cls: 'user-in-team-grid',
+            title: t('app.users_in_team.title'),
+            store: Ext.create('Ext.data.Store', {
+                model: 'App.model.UsersInTeamModel',
+                data: me.teamConfig.usersInTeam
             }),
             columns: columns
         };

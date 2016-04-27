@@ -82,3 +82,8 @@
 .user-invites-grid {
     border-width: 1px 0 1px 0;
 }
+
+.link-to-profile {
+    text-decoration: underline;
+    color: darkgreen;
+}

@@ -5,14 +5,12 @@ Ext.define('App.controller.TeamConfigController', {
     ],
 
     models: [
-        'InviteModel'
+        'InviteModel',
+        'UsersInTeamModel'
     ],
 
     refs: [
-        {
-            ref: 'navigationView',
-            selector: 'navigationview'
-        }
+        { ref: 'navigationView',selector: 'navigationview' }
     ],
 
     init: function() {
