@@ -128,15 +128,46 @@ class Team extends CI_Controller {
             ->get();
     }
 
+    private function getCountUsersInTeam($teamId) {
+        $query = $this->db->select('id')
+            ->from('users_in_team')
+            ->where('id_team', $teamId)
+            ->get();
+
+        return $query->num_rows() == 0;
+    }
+
+    private function getTeamIdByUserId($userId) {
+        $query = $this->db->select('id_team')
+            ->from('users_in_team')
+            ->where('id_user', $userId)
+            ->get();
+
+        if ($query->num_rows() == 0) {
+            return null;
+        } else {
+            $record = $query->row_array();
+            return $record["id_team"];
+        }
+    }
+
     public function leaveTeam() {
         if ($this->isUserData()) {
-            $result = array("success" => true);
+            $result = array("success" => false);
             $userdata = $this->isUserData();
+            $teamId = $this->getTeamIdByUserId($userdata->uid);
 
-            $this->db
-                ->where('id_user', $userdata->uid)
-                ->delete('users_in_team');
+            if ($teamId == null) {
+                $result["error"] = 'app.error.without_team';
+            } else if ($this->getCountUsersInTeam($teamId) < 2) {
+                $result["error"] = 'app.error.team.last_participant';
+            } else {
+                $result["success"] = true;
+                $this->db
+                    ->where('id_user', $userdata->uid)
+                    ->delete('users_in_team');
 
+            }
             echo json_encode($result);
         }
     }
