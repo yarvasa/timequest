@@ -18,7 +18,8 @@ Ext.application({
     ],
     controllers: [
         'NavigationController',
-        'TeamConfigController'
+        'TeamConfigController',
+        'TeamCreationController'
     ],
     requires:[
 

@@ -20,13 +20,17 @@ Ext.define('App.controller.TeamConfigController', {
             'component': {
                 'teamconfigblock': {
                     onDeclineInviteClick: me.onDeclineInviteClick,
-                    onAcceptInviteClick: me.onAcceptInviteClick
+                    onAcceptInviteClick: me.onAcceptInviteClick,
+                    refreshTeamConfigPage: me.onRefreshClick
                 },
                 'teamconfigblock button[action=refresh-data-team]': {
                     click: me.onRefreshClick
                 },
                 'teamconfigblock button#leaveTeam': {
                     click: me.onLeaveTeamClick
+                },
+                'teamconfigblock button#createTeamButton': {
+                    click: me.onCreateTeamClick
                 }
             },
             store: { }
@@ -34,7 +38,7 @@ Ext.define('App.controller.TeamConfigController', {
         me.callParent(arguments);
     },
 
-    onRefreshClick: function(btn) {
+    onRefreshClick: function() {
         var me = this,
             navigationView = me.getNavigationView();
 
@@ -128,5 +132,10 @@ Ext.define('App.controller.TeamConfigController', {
                 App.Utils.error(t('app.error.general'));
             }
         });
+    },
+
+    onCreateTeamClick: function() {
+        var me = this;
+        Ext.create('App.view.team.TeamCreationWindow');
     }
 });

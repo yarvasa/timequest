@@ -158,4 +158,55 @@ class Team extends CI_Controller {
             return $result;
         }
     }
+
+    private function getTeamByName($teamName) {
+        $query = $this->db->select('id')
+            ->from('teams')
+            ->where('name', $teamName)
+            ->where('status', "ACTIVE")
+            ->get();
+
+        if ($query->num_rows() == 0) {
+            return null;
+        } else {
+            return $query->row_array();
+        }
+    }
+
+    public function createTeam() {
+        $json = file_get_contents('php://input');
+        $post = json_decode($json);
+
+        if ($this->isUserData()) {
+            $result = array(
+                "success" => false
+            );
+            $userdata = $this->isUserData();
+            $teamName = $post->teamName;
+
+            if (!$teamName) {
+                $result["error"] = 'app.team.empty_name';
+            } else if ($this->getCurrentTeam($userdata)) {
+                $result["error"] = 'app.error.cant_create_in_team';
+            } else if ($this->getTeamByName($teamName)) {
+                $result["error"] = 'app.error.not_unique_team_name';
+            } else {
+                $this->db->insert("teams", array(
+                    "name" => $teamName,
+                    "status" => "ACTIVE"
+                ));
+
+                $createdTeam = $this->getTeamByName($teamName);
+                $this->db->insert("users_in_team", array(
+                    "id_user" => $userdata->uid,
+                    "id_team" => $createdTeam['id'],
+                    "status" => "CAPTAIN"
+                ));
+
+                $result["success"] = true;
+            }
+
+            echo json_encode($result);
+        }
+    }
 }
